@@ -189,7 +189,7 @@
     progress.style.width = Math.min((elapsed/total)*100,100) + '%';
     const idx = OFFSETS.findLastIndex ? OFFSETS.findLastIndex(o => o <= elapsed) : OFFSETS.reduce((best,o,i) => o<=elapsed ? i : best, 0);
     if (idx !== cur) goTo(idx);
-    if (elapsed >= total) { playing=false; iconPlay.style.display=''; iconPause.style.display='none'; return; }
+    if (elapsed >= total) { elapsed = 0; last = null; goTo(0); }
     raf = requestAnimationFrame(tick);
   }
 
