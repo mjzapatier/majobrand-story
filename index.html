@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mariajosé Zapatier Q.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,300;12..96,400;12..96,500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --cream:#F4F0E8; --ink:#141414; --muted:#9A9088; --rule:#E0D9CE; --red:#ED303A; }
+  html, body { width:100%; height:100%; overflow:hidden; background:var(--cream); color:var(--ink); -webkit-font-smoothing:antialiased; user-select:none; }
+
+  #progress { position:fixed; top:0; left:0; height:1px; background:var(--ink); width:0; transition:width 0.08s linear; z-index:200; }
+
+  #hud { position:fixed; top:0; left:0; right:0; padding:22px 36px; display:flex; justify-content:space-between; align-items:center; z-index:100; }
+  .hud-label { font-family:'Bricolage Grotesque',sans-serif; font-size:9px; font-weight:300; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); }
+
+  #stage { width:100%; height:100%; position:relative; }
+
+  .slide { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:80px 12vw; opacity:0; pointer-events:none; transition:opacity 0.9s ease; }
+  .slide.active { opacity:1; pointer-events:auto; }
+
+  .slide-num { font-family:'Bricolage Grotesque',sans-serif; font-size:9px; font-weight:300; letter-spacing:0.25em; text-transform:uppercase; color:var(--muted); margin-bottom:36px; }
+
+  .slide h1 { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(2.2rem,4.5vw,3.8rem); font-weight:300; line-height:1.15; letter-spacing:-0.02em; color:var(--ink); max-width:820px; }
+  .slide h1 em { font-style:normal; color:var(--red); }
+
+  .slide p { font-family:'Inter',sans-serif; font-size:clamp(0.85rem,1.3vw,1rem); font-weight:300; line-height:1.8; color:var(--muted); max-width:520px; margin-top:28px; }
+  .slide .rule { width:32px; height:1px; background:var(--rule); margin-top:40px; }
+
+  .slide-close { align-items:center; text-align:center; }
+  .slide-close h1 { text-align:center; }
+  .slide-close p { text-align:center; }
+  .strawberry { margin-bottom:36px; }
+  .dagger { font-family:'Bricolage Grotesque',sans-serif; font-size:11px; font-weight:300; color:var(--muted); letter-spacing:0.2em; margin-top:48px; }
+
+  #controls { position:fixed; bottom:32px; left:0; right:0; display:flex; justify-content:center; align-items:center; gap:20px; z-index:100; }
+  .ctrl-btn { background:none; border:none; cursor:pointer; padding:8px; display:flex; align-items:center; justify-content:center; opacity:0.3; transition:opacity 0.2s; }
+  .ctrl-btn:hover { opacity:0.8; }
+  .ctrl-btn:disabled { opacity:0.1; cursor:default; }
+  .ctrl-btn svg { width:16px; height:16px; stroke:var(--ink); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+  #dots { display:flex; gap:8px; align-items:center; }
+  .dot { width:4px; height:4px; border-radius:50%; background:var(--ink); opacity:0.18; cursor:pointer; transition:opacity 0.2s, transform 0.2s; }
+  .dot.active { opacity:0.65; transform:scale(1.4); }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div id="hud">
+  <span class="hud-label">Mariajosé Zapatier Q.</span>
+  <span class="hud-label" id="hud-chapter">—</span>
+</div>
+<div id="stage">
+
+  <div class="slide active" data-chapter="Origin">
+    <div class="slide-num">I</div>
+    <h1>Some brands speak <em>loudly.</em><br>The ones I love<br>don't have to.</h1>
+    <div class="rule"></div>
+  </div>
+
+  <div class="slide" data-chapter="Beginning">
+    <div class="slide-num">II</div>
+    <h1>I come from Ecuador.</h1>
+    <p>I grew up understanding that beauty doesn't announce itself. It just exists.</p>
+    <div class="rule"></div>
+  </div>
+
+  <div class="slide" data-chapter="Career">
+    <div class="slide-num">III</div>
+    <h1>I built my career<br>in Buenos Aires —</h1>
+    <p>Inside complex systems. Banking, retail, payment ecosystems. Learning how to protect an identity when a thousand people are trying to dilute it.</p>
+    <div class="rule"></div>
+  </div>
+
+  <div class="slide" data-chapter="Obsession">
+    <div class="slide-num">IV</div>
+    <h1>That's where I found<br>my <em>obsession.</em></h1>
+    <p>The discipline of restraint. Knowing what to keep. Knowing what to remove.</p>
+    <div class="rule"></div>
+  </div>
+
+  <div class="slide" data-chapter="Recognition">
+    <div class="slide-num">V</div>
+    <h1>There's a brand I've understood<br>since I was young.</h1>
+    <p>Not because I studied it. Because I wore it. Because it taught me, before I had words for it, that less is the most powerful thing you can say.</p>
+    <div class="rule"></div>
+  </div>
+
+  <div class="slide" data-chapter="The Move">
+    <div class="slide-num">VI</div>
+    <h1>I moved to<br>the Netherlands.</h1>
+    <p>To work closer to the brands that think the way I do.</p>
+    <div class="rule"></div>
+  </div>
+
+  <div class="slide slide-close" data-chapter="Now">
+    <div class="slide-num">VII</div>
+    <div class="strawberry">
+      <svg width="34" height="44" viewBox="0 0 34 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#c)">
+          <path d="M16.6736 42.4941C11.5439 42.4941 1.28467 31.2348 1.28467 20.6048C1.28467 12.9061 8.17303 11.6301 16.6736 11.6301C25.1741 11.6301 32.0625 12.9147 32.0625 20.6048C32.0625 31.2262 21.8032 42.4941 16.6736 42.4941Z" stroke="#ED303A" stroke-width="2.56913" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16.6733 19.3201V21.8892" stroke="#ED303A" stroke-width="2.56913" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M11.5439 27.019V29.5882" stroke="#ED303A" stroke-width="2.56913" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16.6733 34.709V37.3557" stroke="#ED303A" stroke-width="2.56913" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21.8032 27.019V29.5882" stroke="#ED303A" stroke-width="2.56913" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M26.9331 19.3201V21.8892" stroke="#ED303A" stroke-width="2.56913" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6.41406 19.3201V21.8892" stroke="#ED303A" stroke-width="2.56913" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16.6736 1.28467C16.6736 1.28467 14.1045 2.87097 14.1045 6.50051C14.1045 10.1301 16.6736 11.6301 16.6736 11.6301C16.6736 11.6301 19.2427 10.1301 19.2427 6.50051C19.2427 2.87097 16.6736 1.28467 16.6736 1.28467Z" stroke="#ED303A" stroke-width="2.56913" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M19.2252 6.94021C21.3633 5.11251 24.4497 3.9314 26.9326 3.9314C26.9326 8.18166 20.9236 11.6302 16.6733 11.6302" stroke="#ED303A" stroke-width="2.56913" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14.1214 6.94021C11.9834 5.11251 8.89698 3.9314 6.41406 3.9314C6.41406 8.18166 12.4231 11.6302 16.6733 11.6302" stroke="#ED303A" stroke-width="2.56913" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <defs><clipPath id="c"><rect width="34" height="44" fill="white"/></clipPath></defs>
+      </svg>
+    </div>
+    <h1>Mariajosé Zapatier Q.</h1>
+    <p>I build visual systems that protect what's essential —<br>across markets, at scale,<br>without losing the silence<br>that makes a brand worth looking at.</p>
+    <div class="dagger">✦</div>
+  </div>
+
+</div>
+
+<div id="controls">
+  <button class="ctrl-btn" id="btn-prev" disabled>
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div id="dots"></div>
+  <button class="ctrl-btn" id="btn-play">
+    <svg id="icon-play" viewBox="0 0 24 24" style="display:none"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor" stroke="none"/></svg>
+    <svg id="icon-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="currentColor" stroke="none"/><rect x="14" y="4" width="4" height="16" fill="currentColor" stroke="none"/></svg>
+  </button>
+  <button class="ctrl-btn" id="btn-next">
+    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dotsEl = document.getElementById('dots');
+  const progress = document.getElementById('progress');
+  const hudChapter = document.getElementById('hud-chapter');
+  const btnPrev = document.getElementById('btn-prev');
+  const btnNext = document.getElementById('btn-next');
+  const btnPlay = document.getElementById('btn-play');
+  const iconPlay = document.getElementById('icon-play');
+  const iconPause = document.getElementById('icon-pause');
+  const TOTAL = slides.length;
+  const DURATIONS = [5, 6, 7, 6, 8, 6, 9];
+  const OFFSETS = [0,5,11,18,24,32,38];
+  const TOTAL_DUR = 41;
+  let cur = 0, elapsed = 0, playing = true, last = null, raf;
+
+
+  slides.forEach((_,i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i===0?' active':'');
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(idx) {
+    slides[cur].classList.remove('active');
+    dotsEl.querySelectorAll('.dot')[cur].classList.remove('active');
+    cur = idx;
+    slides[cur].classList.add('active');
+    dotsEl.querySelectorAll('.dot')[cur].classList.add('active');
+    hudChapter.textContent = slides[cur].dataset.chapter;
+    btnPrev.disabled = cur === 0;
+    btnNext.disabled = cur === TOTAL-1;
+    elapsed = OFFSETS[cur];
+  }
+
+  btnNext.addEventListener('click', () => { if(cur<TOTAL-1) goTo(cur+1); });
+  btnPrev.addEventListener('click', () => { if(cur>0) goTo(cur-1); });
+  btnPlay.addEventListener('click', () => {
+    playing = !playing;
+    iconPlay.style.display = playing ? 'none' : '';
+    iconPause.style.display = playing ? '' : 'none';
+    if (playing) { last = null; raf = requestAnimationFrame(tick); }
+    else cancelAnimationFrame(raf);
+  });
+
+  function tick(ts) {
+    if (!playing) return;
+    if (last !== null) elapsed += (ts - last) / 1000;
+    last = ts;
+    const total = TOTAL_DUR;
+    progress.style.width = Math.min((elapsed/total)*100,100) + '%';
+    const idx = OFFSETS.findLastIndex ? OFFSETS.findLastIndex(o => o <= elapsed) : OFFSETS.reduce((best,o,i) => o<=elapsed ? i : best, 0);
+    if (idx !== cur) goTo(idx);
+    if (elapsed >= total) { playing=false; iconPlay.style.display=''; iconPause.style.display='none'; return; }
+    raf = requestAnimationFrame(tick);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key==='ArrowRight' && cur<TOTAL-1) goTo(cur+1);
+    else if (e.key==='ArrowLeft' && cur>0) goTo(cur-1);
+    else if (e.key===' ') { e.preventDefault(); btnPlay.click(); }
+  });
+
+  goTo(0); last=null; raf=requestAnimationFrame(tick);
+</script>
+</body>
+</html>
